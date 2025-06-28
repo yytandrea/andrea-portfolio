@@ -1,23 +1,60 @@
 <!DOCTYPE html>
 <html lang="en-US">
     <head>
-        <title> ToDo List </title>
-        <meta name="description" content="ToDo List">
+        <title>Andrea Portfolio</title>
         <meta charset="utf-8">
-        <link rel="stylesheet" href="style.css">
+        <meta name="viewport" content="width=device-width, initial-scale=1" >
+        <meta name="description" content="Andrea Yao's portfolio" >
+        <link rel="stylesheet" href="style.css" >    
     </head>
 
     <body>
-        <header>
-            <h1>To-do List</h1>
-        </header>
-        <main>
-            <form id="form">
-                <input type="text" id="form-input" placeholder="To-do">
-                <button type="submit"> Add To-do</button>
-            </form>
-            <ul id="list" ></ul>
-        </main>
+    <!-- LOADING SCREEN -->
+    <div id="loader">
+        <h1 class="loader-name">Andrea Yao</h1>
+        <div class="loader-icons">
+        <img src="assets/icons/spatial.svg" class="loader-icon" alt="icon">
+        <img src="assets/icons/visual.svg" class="loader-icon" alt="icon">
+        <img src="assets/icons/interactive.svg" class="loader-icon" alt="icon">
+        </div>
+    </div>
 
+    <!-- TOP BAR -->
+    <header id="topbar">
+        <h1 class="logo">Andrea Yao</h1>
+        <nav>
+        <a href="index.html"><img src="assets/icons/home.svg" alt="Home" ></a>
+        <a href="spatial.html"><img src="assets/icons/spatial.svg" alt="Spatial" ></a>
+        <a href="visual.html"><img src="assets/icons/visual.svg" alt="Visual" ></a>
+        <a href="interactive.html"><img src="assets/icons/interactive.svg" alt="Interactive" ></a>
+        </nav>
+    </header>
+
+    <!-- MAIN SECTIONS -->
+    <main>
+        <section class="intro">
+        <p>\"bio\"</p>
+        </section>
+
+        <section class="home-spatial">
+        <h2>Spatial</h2>
+        </section>
+
+        <section class="home-visual">
+        <h2>Visual</h2>
+        </section>
+
+        <section class="home-interactive">
+        <h2>Interactive</h2>
+        </section>
+    </main>
+    <!-- GSAP & ScrollTrigger -->
+    <script defer src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script defer src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+
+    <!-- Lenis Scroll -->
+    <script defer src="https://cdn.jsdelivr.net/npm/@studio-freight/lenis@1.0.39/bundled/lenis.min.js"></script>
+    <!-- Your Custom Script -->
+    <script src="script.js"></script>
     </body>
 </html>
