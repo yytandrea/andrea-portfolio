@@ -1,9 +1,10 @@
 gsap.registerPlugin (Flip);
+gsap.registerPlugin (ScrollTrigger);
 
-
+// Init Lenis//
 const lenis = new Lenis({
-    duration: 1.2,
-    easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t))
+    //duration: 1.2,
+    //easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t))
 });
   
 function raf(time) {
@@ -11,9 +12,22 @@ function raf(time) {
   requestAnimationFrame(raf);
 }
 requestAnimationFrame(raf);
+
+// Synchronize Lenis scrolling with GSAP's ScrollTrigger plugin
+lenis.on('scroll', ScrollTrigger.update);
+
+// Add Lenis's requestAnimationFrame (raf) method to GSAP's ticker
+// This ensures Lenis's smooth scroll animation updates on each GSAP tick
+gsap.ticker.add((time) => {
+  lenis.raf(time * 1000); // Convert time from seconds to milliseconds
+});
+
+// Disable lag smoothing in GSAP to prevent any delay in scroll animations
+gsap.ticker.lagSmoothing(0);
+
   
 // Animate loader sequence
-window.addEventListener("load",()=>{
+/*window.addEventListener("load",()=>{
 
   const loader = document.getElementById("loader");
 
@@ -27,8 +41,7 @@ window.addEventListener("load",()=>{
         opacity: 0,
         duration: loaderChildren.length - index ,
         ease: "power3.inOut"
-      }, index*1
-      /*index === 0 ? 0 : ">-1.5"*/);
+      }, index*1.5);
     });
     return tl;
   }
@@ -64,7 +77,7 @@ window.addEventListener("load",()=>{
     const tl = gsap.timeline();
     tl.to(loader, {
       opacity: 0,
-      duration: 0.5,
+      duration: 2,
       onComplete: () => loader.remove()
     });
     return tl;
@@ -76,33 +89,4 @@ window.addEventListener("load",()=>{
     .add(()=>loaderOutro())
     .add(loaderRemove());
 });
-
-
-  /*const clonedName = loaderName.cloneNode(true);
-  const clonedIcons = loaderIcons.cloneNode(true);
-  clonedName.classList.add ("cloned");
-  clonedIcons.classList.add("cloned");
-  logo.innerHTML = "";
-  logo.appendChild(cloneName);
-  topbarNav.innerHTML="";
-  [...clonedIcons.children].forEach(icon => topbarNav.appendChild(icon));*/
-
-
-
-  /*const tl = gsap.timeline();
-
-  tl.to(loaderName, { opacity: 1, y: -10, duration: 0.8 })
-    .to(loaderIcons, { opacity: 1, y: -10, duration: 0.8, delay: 0.3 })
-    .to(loader, { opacity: 0, duration: 1, delay: 1 })
-    .set(loader, { display: "none" })
-    .from("#topbar", { y: -50, opacity: 0, duration: 0.8 });
- });*/
-  
-  // You can add scroll-based animations here
-  // Example:
-  // gsap.from(".home-spatial", {
-  //   scrollTrigger: ".home-spatial",
-  //   y: 50,
-  //   opacity: 0,
-  //   duration: 1
-  // });
+*/

@@ -4,6 +4,13 @@
 
 */
 
+.grid {
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
+  gap: 1rem; /* adjust spacing as needed */
+  width: 100%;
+}
+
 *,
 *::before,
 *::after{
@@ -28,6 +35,8 @@ body{
   height: -webkit-fill-available;
   color:#cf4d22;
   background-color: bisque;
+  display:grid;
+  padding: 0px 40px 0px 40px;
 }
 
 body.overflow-hidden{
@@ -65,7 +74,7 @@ h1,h2,h3,h4,h5,h6{
   padding: 0 24px;
 }
 
-/*loader*/
+/*//  loader   //*/
 #loader {
   position: fixed;
   background-color: orange;
@@ -88,19 +97,69 @@ h1,h2,h3,h4,h5,h6{
   height:auto;
 }
 
+
+
+
+/*// TopBar //*/
 #topbar {
   position: sticky;
   top: 0;
   z-index: 999;
+  grid-column: 1/-1;
+  display: grid;
+  padding-top: 20px;
+  padding-bottom: 20px;
 }
 
-#topbar nav {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 2rem;
+#topbar a{
+  color: #cf4d22;
 }
 
+#topbar h3{
+  font-size: 1rem;
+}
+
+/* Positioning each nav item */
+.nav-name {
+  grid-column: 1 / 2; /* first column */
+}
+
+.nav-spatial {
+  grid-column: 4 / 5; /* 4th column */
+}
+
+.nav-visual {
+  grid-column: 5 / 6; /* 5th column */
+}
+
+.nav-interactive {
+  grid-column: 6 / 6; /* 6th column */
+}
+
+
+/*// Main //*/
+main{
+  padding-top:300px;
+}
+
+
+/*// intro //*/
+.intro > p{
+  text-indent: calc(100% / 6 * 3);
+
+}
+
+.contact{
+  padding-top: 30px;
+}
+
+.contact >p {
+  grid-column: 5/6;
+}
+
+.contact >ul {
+  grid-column: 6/6;
+}
 
 
 
