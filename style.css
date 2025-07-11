@@ -36,7 +36,9 @@ body{
   color:#cf4d22;
   background-color: bisque;
   display:grid;
-  padding: 0px 40px 0px 40px;
+  padding: 0px 50px 0px 50px;
+  overflow-x:hidden;
+  width:auto;
 }
 
 body.overflow-hidden{
@@ -45,6 +47,10 @@ body.overflow-hidden{
 
 main{
   overflow:hidden;
+}
+
+p{
+  display: grid;
 }
 
 a,button{
@@ -115,25 +121,28 @@ h1,h2,h3,h4,h5,h6{
   color: #cf4d22;
 }
 
-#topbar h3{
-  font-size: 1rem;
-}
-
 /* Positioning each nav item */
 .nav-name {
-  grid-column: 1 / 2; /* first column */
+  grid-column: span 2; /* first column */
+}
+
+.nav-name > h3{
+  font-size: 3rem;
 }
 
 .nav-spatial {
   grid-column: 4 / 5; /* 4th column */
+
 }
 
 .nav-visual {
   grid-column: 5 / 6; /* 5th column */
+
 }
 
 .nav-interactive {
   grid-column: 6 / 6; /* 6th column */
+
 }
 
 
@@ -145,8 +154,10 @@ main{
 
 /*// intro //*/
 .intro > p{
-  text-indent: calc(100% / 6 * 3);
-
+  text-indent: calc(100% / 6 * 3); /*fix indent*/
+  text-align:justify;
+  text-align-last: start;
+  font-size:1.5rem;
 }
 
 .contact{
@@ -155,13 +166,74 @@ main{
 
 .contact >p {
   grid-column: 5/6;
+  font-size:1.2rem;
 }
 
 .contact >ul {
   grid-column: 6/6;
+  font-size:1.2rem;
+}
+
+.intro{
+  padding-bottom: 50px;
 }
 
 
 
 
+/*// Spatial //*/
+.home-spatial{
+  overflow:hidden;
+}
+
+
+.gallery-stack{
+  display: flex;
+  align-self: center;
+}
+
+.gallery-slide{
+  height: 80vh;
+  display:block;
+  flex-shrink: 0;
+  align-content: center;
+}
+
+.gallery-stack img{
+  width: 600px;
+  height:300px; 
+  object-fit:cover;
+  flex-shrink:0;
+  border:#cf4d22 solid;
+  align-self: center;
+  justify-self: center;
+}
+
+.spatial-text{
+  position: absolute;
+  width:100%;
+  height:100%;
+  grid-template-rows: 165px 300px 166px;
+}
+
+.spatial-text p {
+  display: block;
+  grid-column: 5/7;
+  grid-row: 2;
+  align-self: end;
+  text-justify: start;
+} 
+
+.spatial-text a {
+  display: block;
+  grid-column: 6;
+  grid-row: 1;
+  align-self: center;
+}
+
+.spatial-text h2{
+  display: block;
+  grid-column: 5;
+  grid-row: 3;
+}
 

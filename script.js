@@ -90,3 +90,26 @@ gsap.ticker.lagSmoothing(0);
     .add(loaderRemove());
 });
 */
+const body = document.querySelector("body")
+const gallerySlides = document.querySelectorAll(".gallery-slide");
+gallerySlides.forEach(slide =>{
+  slide.setAttribute("style", `width:${body.offsetWidth-100}px`)
+})
+
+window.addEventListener("load", () =>{
+  const gallery = document.querySelector(".gallery-stack");
+  const numSlides = gallery.children.length;
+
+  gsap.to(gallery,{
+    xPercent:-100*(numSlides-1),
+    ease:"none",
+    scrollTrigger:{
+      trigger: ".home-spatial",
+      start:"top 100px",
+      end: () => `+=${gallery.offsetWidth}`,
+      scrub: true,
+      pin:true,
+      anticipatePin:1 
+    }
+  })
+});
