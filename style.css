@@ -3,7 +3,11 @@
 @import url (icons);
 
 */
-
+ html {
+  scroll-behavior: auto !important; /* Disable native smooth scroll */
+  overflow-x: hidden;
+ } 
+ 
 .grid {
   display: grid;
   grid-template-columns: repeat(6, 1fr);
@@ -237,3 +241,63 @@ main{
   grid-row: 3;
 }
 
+
+
+/*// Visual //*/
+.home-visual{
+  overflow:hidden;
+  padding-top: 100px;
+  padding-bottom: 100px;
+}
+
+.visual-shelf{
+  height:auto;
+  grid-template-rows: 250px;
+}
+
+.visual-shelf > div{
+  display: block;
+  overflow: hidden;
+}
+
+.visual-shelf img{
+  width: 300px;
+  height:600px; 
+  border:#cf4d22 solid;
+  object-fit: cover;
+}
+
+.shelf-item1{
+  grid-column: 2;
+  grid-row: 1 / span 2;
+}
+
+.shelf-item2{
+  grid-column: 1;
+  grid-row: 2 / span 2;
+}
+
+.shelf-item3{
+  grid-column:  4/ span 2;
+  grid-row: 3 / span 2;
+}
+
+.visual-text{
+  position:absolute;
+  grid-template-rows: repeat(4, 1fr);
+  height: 70vh;
+}
+
+.visual-text a{
+  display:block;
+  grid-area: 2/1/2/1;
+}
+
+.visual-text h2{
+  grid-area: 3/1/3/1;
+  align-self: end;
+}
+
+.visual-text p{
+  grid-area: 4/1/4/3;
+}

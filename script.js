@@ -3,8 +3,9 @@ gsap.registerPlugin (ScrollTrigger);
 
 // Init Lenis//
 const lenis = new Lenis({
-    //duration: 1.2,
-    //easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t))
+    duration: 0.5,
+    easing: (x) => x,
+    smooth:true,
 });
   
 function raf(time) {
@@ -24,6 +25,7 @@ gsap.ticker.add((time) => {
 
 // Disable lag smoothing in GSAP to prevent any delay in scroll animations
 gsap.ticker.lagSmoothing(0);
+
 
   
 // Animate loader sequence
@@ -90,13 +92,17 @@ gsap.ticker.lagSmoothing(0);
     .add(loaderRemove());
 });
 */
-const body = document.querySelector("body")
-const gallerySlides = document.querySelectorAll(".gallery-slide");
-gallerySlides.forEach(slide =>{
-  slide.setAttribute("style", `width:${body.offsetWidth-100}px`)
-})
+
 
 window.addEventListener("load", () =>{
+
+  const body = document.querySelector("body");
+  const gallerySlides = document.querySelectorAll(".gallery-slide");
+  gallerySlides.forEach(slide =>{
+    slide.setAttribute("style", `width:${body.offsetWidth-100}px`)
+  })
+
+
   const gallery = document.querySelector(".gallery-stack");
   const numSlides = gallery.children.length;
 
@@ -112,4 +118,23 @@ window.addEventListener("load", () =>{
       anticipatePin:1 
     }
   })
+
+
+  const shelf = document.querySelector(".visual-shelf");
+  shelf.setAttribute("style",`width:${body.offsetWidth-100}px`);
+  const text = document.querySelector(".visual-text");
+ 
+  gsap.to(text,{
+    scrollTrigger:{
+      trigger: text,
+      start: 'top 100px',
+      end: () => `+=${shelf.scrollHeight-text.clientHeight}`,
+      scrub:true,
+      pin:true,
+      markers:true
+    }
+  })
+
+
 });
+
