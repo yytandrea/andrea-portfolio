@@ -97,44 +97,123 @@ gsap.ticker.lagSmoothing(0);
 window.addEventListener("load", () =>{
 
   const body = document.querySelector("body");
+
+  /*const initImgs = document.querySelectorAll(".init-img");
+  const initOldContainers = document.querySelectorAll(".initOldContainer");
+  const initImgTargets = document.querySelectorAll(".initNewContainer");
+  const sectionTimelines = [];
+
+  initImgs.forEach((initImg,index) => {
+    initImg.setAttribute ("style", `width:${body.offsetWidth-100}px`);
+    
+    let sectionTl = gsap.timeline({paused :true});
+    
+    const initImgState = Flip.getState(initImg);
+    initImgTargets[index].appendChild(initImg);
+    
+    sectionTl.addLabel("start");
+    
+    sectionTl.add(
+      Flip.from(initImgState, {
+        duration: 1,
+        ease: "power2.inOut",
+        absolute: true,
+        scale: true,
+      }),
+      "start"
+    );
+
+    ScrollTrigger.create({
+      trigger: initOldContainers[index],
+      start: "top 100px",
+      once:true,
+      onEnter:() => sectionTl.play()
+    })
+
+    sectionTimelines [index] = sectionTl;
+  });
+*/
+   
+
+  
   const gallerySlides = document.querySelectorAll(".gallery-slide");
   gallerySlides.forEach(slide =>{
     slide.setAttribute("style", `width:${body.offsetWidth-100}px`)
-  })
-
-
+  });
   const gallery = document.querySelector(".gallery-stack");
   const numSlides = gallery.children.length;
 
-  gsap.to(gallery,{
-    xPercent:-100*(numSlides-1),
-    ease:"none",
-    scrollTrigger:{
-      trigger: ".home-spatial",
-      start:"top 100px",
-      end: () => `+=${gallery.offsetWidth}`,
-      scrub: true,
-      pin:true,
-      anticipatePin:1 
-    }
-  })
 
+    gsap.to(gallery,{
+      xPercent:-100*(numSlides-1),
+      ease:"none",
+      scrollTrigger:{
+        trigger: ".home-spatial",
+        start:"top 100px",
+        end: () => `+=${gallery.offsetWidth}`,
+        scrub: true,
+        pin:true,
+        anticipatePin:1 ,
+        markers:true
+      }
+   })
+
+ 
 
   const shelf = document.querySelector(".visual-shelf");
   shelf.setAttribute("style",`width:${body.offsetWidth-100}px`);
   const text = document.querySelector(".visual-text");
  
-  gsap.to(text,{
+ 
+    gsap.to(text,{
+      scrollTrigger:{
+        trigger: text,
+        start: 'top 100px',
+        end: () => `+=${shelf.scrollHeight-text.clientHeight}`,
+        scrub:true,
+        pin:true,
+      }
+    })
+
+    
+
+  const track = document.querySelector(".interactive-track");
+  const intText = document.querySelector(".interactive-text");
+  const interactive = document.querySelector(".home-interactive")
+  interactive.setAttribute("style",`width:${body.offsetWidth-100}px`);
+
+  gsap.to(intText,{
     scrollTrigger:{
-      trigger: text,
+      trigger: intText,
       start: 'top 100px',
-      end: () => `+=${shelf.scrollHeight-text.clientHeight}`,
+      end: () => `+=${track.scrollHeight} bottom`,
       scrub:true,
       pin:true,
-      markers:true
     }
   })
+  
+  const images = [
+    "assets/images/1.jpg",
+    "assets/images/2.jpg"
+  ]
+
+  const trackItems = document.querySelectorAll(".track-item");
+  const imgWrapper = document.querySelector(".img-wrapper");
+  
 
 
-});
+  trackItems.forEach((trackItem,index) =>{
+    trackItem.addEventListener( "mouseenter", ()=>{
+      const img = document.createElement("img");
+      img.src = images[index];
+      img.alt = `image ${index+1}`;
+      
+      imgWrapper.innerHTML = "";
+      imgWrapper.appendChild(img);
+      img.onload = () =>{imgWrapper.setAttribute("style",`top:${(intText.clientHeight-img.clientHeight)/2}px`);}
+    });
+  });
+
+
+})
 

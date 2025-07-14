@@ -7,7 +7,7 @@
   scroll-behavior: auto !important; /* Disable native smooth scroll */
   overflow-x: hidden;
  } 
- 
+
 .grid {
   display: grid;
   grid-template-columns: repeat(6, 1fr);
@@ -53,9 +53,6 @@ main{
   overflow:hidden;
 }
 
-p{
-  display: grid;
-}
 
 a,button{
   cursor:pointer;
@@ -112,13 +109,14 @@ h1,h2,h3,h4,h5,h6{
 
 /*// TopBar //*/
 #topbar {
-  position: sticky;
+  position: fixed;
   top: 0;
   z-index: 999;
   grid-column: 1/-1;
   display: grid;
   padding-top: 20px;
   padding-bottom: 20px;
+  width:100%;
 }
 
 #topbar a{
@@ -203,7 +201,7 @@ main{
   align-content: center;
 }
 
-.gallery-stack img{
+.gallery-slide > img{
   width: 600px;
   height:300px; 
   object-fit:cover;
@@ -241,6 +239,15 @@ main{
   grid-row: 3;
 }
 
+/*.init-img {
+  position: absolute;
+  object-fit:cover;
+  z-index:100;
+  height:70vh;
+  border:#cf4d22 solid;
+  background-color: aliceblue;
+}
+*/
 
 
 /*// Visual //*/
@@ -301,3 +308,59 @@ main{
 .visual-text p{
   grid-area: 4/1/4/3;
 }
+
+
+
+/*// Interactive //*/
+.home-interactive{
+  overflow:hidden;
+  padding-bottom: 100px;
+}
+
+.interactive-track{
+  height:max-content;
+  grid-column: 1/3;
+  overflow:hidden;
+}
+
+.interactive-track > div{
+  display: block;
+  overflow: hidden;
+  height: 100px;
+  border:#cf4d22 dotted;
+  padding:100px
+}
+
+.interactive-text{
+  grid-column: 3/7;
+  height:70vh;
+  display:flex;
+  flex-direction: column;
+  justify-content: end;
+  align-items: end;
+}
+
+.img-wrapper{
+  position:absolute;
+}
+
+.interactive-text img{
+  width:400px;
+  height: 300px;
+  object-fit: cover;
+  z-index: 50;
+  top: 50px;
+  align-self: center;
+  justify-self: center;
+
+}
+
+
+
+
+
+/*// End //*/
+.home-end{
+  height: 1000px;
+}
+
