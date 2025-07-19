@@ -98,41 +98,25 @@ window.addEventListener("load", () =>{
 
   const body = document.querySelector("body");
 
-  /*const initImgs = document.querySelectorAll(".init-img");
-  const initOldContainers = document.querySelectorAll(".initOldContainer");
+  const initImgs = document.querySelectorAll(".init-img");
   const initImgTargets = document.querySelectorAll(".initNewContainer");
-  const sectionTimelines = [];
 
-  initImgs.forEach((initImg,index) => {
-    initImg.setAttribute ("style", `width:${body.offsetWidth-100}px`);
-    
-    let sectionTl = gsap.timeline({paused :true});
-    
-    const initImgState = Flip.getState(initImg);
-    initImgTargets[index].appendChild(initImg);
-    
-    sectionTl.addLabel("start");
-    
-    sectionTl.add(
-      Flip.from(initImgState, {
-        duration: 1,
-        ease: "power2.inOut",
-        absolute: true,
-        scale: true,
-      }),
-      "start"
-    );
+  function initSequence(index){
 
-    ScrollTrigger.create({
-      trigger: initOldContainers[index],
-      start: "top 100px",
-      once:true,
-      onEnter:() => sectionTl.play()
+    const initImgState = Flip.getState(initImgs[index]);
+    initImgTargets[index].appendChild(initImgs[index]);
+    
+    Flip.from(initImgState, {
+      duration: 2,
+      ease: "power2.inOut",
+      absolute: true,
+      scale: true,
+      onComplete:()=>{
+
+      }
     })
+  };
 
-    sectionTimelines [index] = sectionTl;
-  });
-*/
    
 
   
@@ -143,20 +127,20 @@ window.addEventListener("load", () =>{
   const gallery = document.querySelector(".gallery-stack");
   const numSlides = gallery.children.length;
 
+  const tlSpatial = gsap.timeline({
+    scrollTrigger:{
+      trigger: ".home-spatial",
+      start:"top 100px",
+      end: () => `+=${gallery.offsetWidth}`,
+      scrub: true,
+      pin:true,
+      anticipatePin:1 ,
+      markers:true
+    }
+  })
 
-    gsap.to(gallery,{
-      xPercent:-100*(numSlides-1),
-      ease:"none",
-      scrollTrigger:{
-        trigger: ".home-spatial",
-        start:"top 100px",
-        end: () => `+=${gallery.offsetWidth}`,
-        scrub: true,
-        pin:true,
-        anticipatePin:1 ,
-        markers:true
-      }
-   })
+  tlSpatial.add(()=>initSequence(0))
+    .to(gallery,{xPercent:-100*(numSlides-1),ease:"none"},">1")
 
  
 
@@ -164,16 +148,18 @@ window.addEventListener("load", () =>{
   shelf.setAttribute("style",`width:${body.offsetWidth-100}px`);
   const text = document.querySelector(".visual-text");
  
- 
-    gsap.to(text,{
-      scrollTrigger:{
-        trigger: text,
-        start: 'top 100px',
-        end: () => `+=${shelf.scrollHeight-text.clientHeight}`,
-        scrub:true,
-        pin:true,
-      }
-    })
+  const tlVisual = gsap.timeline({
+    scrollTrigger:{
+      trigger: ".home-visual",
+      start: 'top 100px',
+      end: () => `+=${shelf.scrollHeight-text.clientHeight}`,
+      scrub:true,
+      pin:text,
+    } 
+  })
+  
+  tlVisual.add(()=>initSequence(1))
+    .to(text,{},">1")
 
     
 
@@ -184,11 +170,11 @@ window.addEventListener("load", () =>{
 
   gsap.to(intText,{
     scrollTrigger:{
-      trigger: intText,
+      trigger: ".home-interactive",
       start: 'top 100px',
       end: () => `+=${track.scrollHeight} bottom`,
       scrub:true,
-      pin:true,
+      pin:intText,
     }
   })
   
